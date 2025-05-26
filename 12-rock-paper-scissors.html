@@ -4,45 +4,42 @@
     <title>Rock Paper Scissors</title>
     <link 
     rel="stylesheet" 
-    href="styles/12-rock-paper-scissors.css"> <!--A void element, it uses two attributes, rel (relation) and href (tells the computer which file we want to load)-->
+    href="styles/12r.css"> <!--A void element, it uses two attributes, rel (relation) and href (tells the computer which file we want to load)-->
   </head>
   <body> 
     <p class="title">Rock Paper Scissors</p>
 
-    <button onClick="
-      playGame('rock');
-    " class="move-button">
-      <img src="images/rock-emoji.png" class="move-icon"></button> <!--The image element does not require a closing tag because it is a void element-->
+    <button class="move-button js-rock-button">
+      <img src="images/rock-emoji.png"
+       class="move-icon">
+      </button> <!--The image element does not require a closing tag because it is a void element-->
     
-    <button onClick="
-      playGame('paper');
-    " class="move-button">
-    <img src="images/paper-emoji.png" class="move-icon"></button>
+    <button class="move-button js-paper-button">
+    <img src="images/paper-emoji.png"
+     class="move-icon">
+    </button>
     
-    <button onClick="
-      playGame('scissors');
-    " class="move-button">
-    <img src="images/scissors-emoji.png" class="move-icon"></button>
+    <button class="move-button js-scissors-button">
+    <img src="images/scissors-emoji.png"
+     class="move-icon">
+    </button>
 
     <p class="js-result result"></p>
     <p class="js-moves"></p>
     <p class="js-score score"></p> <!--block element so it takes up an entire line-->
 
-    <button onClick="
-    score.wins = 0;
-    score.losses = 0;
-    score.ties = 0;
-    localStorage.removeItem('score');
-    updateScoreElement();
-    "class="reset-score-button">Reset Score</button>
+    <button class="reset-score-button
+     js-resetscore-button">
+     Reset Score</button>
 
-    <button class="auto-play-button js-stop-button" onclick="
-      autoPlay();
-    ">Auto Play</button>
-    
+    <button class="auto-play-button 
+    js-stop-button 
+    js-autoplay-button" 
+    >Auto Play</button>
+    <div class=" js-confirm-text-button"></div>
 
 
-    <script src="scripts/12-rock-paper-scissors.js"> //Script elements runs when the page is loaded </script>
+    <script src="scripts/12r.js"> //Script elements runs when the page is loaded </script>
   </body>
 </html>
 

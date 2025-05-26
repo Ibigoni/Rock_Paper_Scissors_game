@@ -19,7 +19,21 @@ if (!score) {
 let isAutoPlaying = false; //flag statement (boolean)
 let intervalId;
 
-function autoPlay() {
+// const autoPlay = () => {
+
+// };
+
+document.querySelector('.js-autoplay-button')
+.addEventListener('click', () => {
+  autoPlay();
+});
+
+document.body.addEventListener('keydown', (event) => {
+  if (event.key === 'a') {
+    autoPlay();
+  }
+});
+function autoPlay() {//This is better because it enables hoisting.
   const buttonElement = document.querySelector('.js-stop-button');
   // if (buttonElement.innerText === 'Auto Play') {
   //   buttonElement.innerHTML = 'Stop';
@@ -28,8 +42,8 @@ function autoPlay() {
   // }
 
   if (!isAutoPlaying && buttonElement.innerText === 'Auto Play') {
-    buttonElement.innerHTML = 'Stop';
-     intervalId = setInterval(function() {
+    buttonElement.innerHTML = 'Stop Playing';
+     intervalId = setInterval(() => {
       const playerMove = pickComputerMove();
       playGame(playerMove);
     }, 1000); //setInterval returns a number like an Id but it is different everytime it runs
@@ -41,7 +55,30 @@ function autoPlay() {
   }
 }
 
+document.querySelector('.js-rock-button')
+.addEventListener('click', () => {
+  playGame('rock');
+});
 
+document.querySelector('.js-paper-button')
+.addEventListener('click', () => {
+  playGame('paper');
+});
+
+document.querySelector('.js-scissors-button')
+.addEventListener('click', () => {
+  playGame('scissors');
+});
+
+document.body.addEventListener('keydown', (event) => {//event param contains the key pressed
+  if (event.key === 'r') {
+    playGame('rock');
+  } else if (event.key === 'p'){
+    playGame('paper');
+  } else if (event.key === 's') {
+    playGame('scissors');
+  }
+});
 
 
 function playGame(playerMove) {
@@ -102,6 +139,76 @@ class="move-icon">
 Computer`;
 }
 
+const confirmMessage = 'Are you sure you want to reset the socre?';
+const html = 
+`
+<p>${confirmMessage} 
+  <button class="js-check-button">Yes</button>
+  <button class="js-no-button">No</button>
+</p>
+`;
+
+
+
+document.querySelector('.js-resetscore-button')
+.addEventListener('click', () => {
+  document.querySelector('.js-confirm-text-button')
+  .innerHTML = html;
+  
+  const yesButton = document.querySelector('.js-check-button');
+  const noButton = document.querySelector('.js-no-button');
+
+  //Use .addEventListener to check if the button has been clicked
+    yesButton.addEventListener('click', () => {
+      if (yesButton.innerText === 'Yes'){
+        score.wins = 0;
+        score.losses = 0;
+        score.ties = 0;
+        localStorage.removeItem('score');
+        updateScoreElement();
+        document.querySelector('.js-confirm-text-button').innerHTML = '';
+      }
+    });
+    
+    noButton.addEventListener('click', () => {
+      if (noButton.innerText === 'No'){
+        document.querySelector('.js-confirm-text-button').innerHTML = '';
+      }
+    });
+
+
+});
+
+
+document.body.addEventListener('keydown', (event) => {
+  if (event.key === 'Backspace') {
+    document.querySelector('.js-confirm-text-button')
+  .innerHTML = html;
+  
+  const yesButton = document.querySelector('.js-check-button');
+  const noButton = document.querySelector('.js-no-button');
+
+  //Use .addEventListener to check if the button has been clicked
+    yesButton.addEventListener('click', () => {
+      if (yesButton.innerText === 'Yes'){
+        score.wins = 0;
+        score.losses = 0;
+        score.ties = 0;
+        localStorage.removeItem('score');
+        updateScoreElement();
+        document.querySelector('.js-confirm-text-button').innerHTML = '';
+      }
+    });
+  
+    noButton.addEventListener('click', () => {
+      if (noButton.innerText === 'No'){
+        document.querySelector('.js-confirm-text-button').innerHTML = '';
+      }
+    });
+  }
+});
+
+
 
 function updateScoreElement() {
   document.querySelector('.js-score')
@@ -124,3 +231,5 @@ function pickComputerMove() {
 
     return computerMove; 
   }
+
+  
